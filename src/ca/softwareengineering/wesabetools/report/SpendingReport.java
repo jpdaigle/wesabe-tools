@@ -1,18 +1,23 @@
-package ca.softwareengineering.wesabetools;
+package ca.softwareengineering.wesabetools.report;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import ca.softwareengineering.wesabetools.model.MutableDouble;
 import ca.softwareengineering.wesabetools.model.TransactionStore;
 import ca.softwareengineering.wesabetools.model.Util;
 import ca.softwareengineering.wesabetools.model.WesabeTransaction;
 
-public class SpendingReport {
+public class SpendingReport implements TransactionReport {
 
-	public static String getSpendingReport(TransactionStore store) {
+	public void runReport(OutputStream os, TransactionStore store) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
+
 		List<WesabeTransaction> transactions = store.transactions();
 		Map<String, MutableDouble> sums = new HashMap<String, MutableDouble>();
 
@@ -45,9 +50,15 @@ public class SpendingReport {
 					tag_amt += Math.abs(t.getAmount());
 				}
 			}
-			if (tag_amt > 0)
-				System.out.printf(" %s %2.2f\n", Util.padRight(toptag, 20), tag_amt);
+			if (tag_amt > 0) {
+				String strout = String.format(" %s %2.2f\n", Util.padRight(toptag, 20), tag_amt);
+				bw.write(strout);
+			}
 		}
+		bw.close();
+	}
+
+	public String getSpendingReport(TransactionStore store) {
 		return "";
 	}
 

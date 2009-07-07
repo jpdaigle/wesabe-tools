@@ -58,7 +58,7 @@ public class DomParseSupport {
 
 	private static String getChildValue(String tag, Element base) {
 		NodeList nl = base.getElementsByTagName(tag);
-		Node nValue = (Node) nl.item(0).getChildNodes().item(0);
+		Node nValue = nl.item(0).getChildNodes().item(0);
 		return nValue.getNodeValue();
 	}
 

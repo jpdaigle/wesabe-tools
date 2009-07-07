@@ -22,4 +22,8 @@ public class Util {
 	public static String getDateString(long time) {
 		return sdf.format(new Date(time));
 	}
+
+	public static String padRight(String str, int n) {
+		return String.format("%1$-" + n + "s", str);
+	}
 }

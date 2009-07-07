@@ -11,6 +11,8 @@ public class WesabeTransaction {
 	private final double amount;
 	private final List<String> tags;
 	private final boolean isTransfer;
+
+	// This field is mutable and public, used by reports to store their state
 	public Object customData;
 
 	public WesabeTransaction(long date, double amount, List<String> tags, boolean isTransfer) {

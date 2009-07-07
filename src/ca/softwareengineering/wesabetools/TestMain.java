@@ -4,6 +4,7 @@ import java.io.File;
 import ca.softwareengineering.wesabetools.model.Filters;
 import ca.softwareengineering.wesabetools.model.TransactionStore;
 import ca.softwareengineering.wesabetools.model.Util;
+import ca.softwareengineering.wesabetools.report.InclusiveTopTagsSpendingReport;
 import ca.softwareengineering.wesabetools.report.SpendingReport;
 import ca.softwareengineering.wesabetools.report.TransactionReport;
 import ca.softwareengineering.wesabetools.xml.DomParseSupport;
@@ -33,9 +34,12 @@ public class TestMain {
 			System.out.printf("Date Range: %s - %s\n", startDate, endDate);
 			System.out.println(filteredStore.getStats());
 
-			TransactionReport spendingRep = new SpendingReport();
+			TransactionReport spendingRep = new SpendingReport(), inclusiveRep = new InclusiveTopTagsSpendingReport();
 			writeReportHeader(spendingRep);
 			spendingRep.runReport(System.out, filteredStore);
+			System.out.println();
+			writeReportHeader(inclusiveRep);
+			inclusiveRep.runReport(System.out, filteredStore);
 
 		} catch (Exception e) {
 			e.printStackTrace();

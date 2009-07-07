@@ -55,7 +55,7 @@ public class SpendingReport implements TransactionReport {
 				bw.write(strout);
 			}
 		}
-		bw.close();
+		bw.flush();
 	}
 
 	public String getSpendingReport(TransactionStore store) {

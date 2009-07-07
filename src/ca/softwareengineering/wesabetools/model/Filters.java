@@ -11,7 +11,6 @@ public class Filters {
 			_date = date;
 		}
 
-		@Override
 		public boolean accept(WesabeTransaction w) {
 			return w.getDate() <= _date;
 		}
@@ -24,14 +23,12 @@ public class Filters {
 			_date = date;
 		}
 
-		@Override
 		public boolean accept(WesabeTransaction w) {
 			return w.getDate() >= _date;
 		}
 	}
 
 	public static class NotTransfer implements TransactionFilter {
-		@Override
 		public boolean accept(WesabeTransaction w) {
 			return !w.isTransfer();
 		}
@@ -44,7 +41,6 @@ public class Filters {
 			this.cutoff = cutoff;
 		}
 
-		@Override
 		public boolean accept(WesabeTransaction w) {
 			return w.getAmount() <= this.cutoff;
 		}

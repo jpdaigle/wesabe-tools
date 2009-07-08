@@ -4,10 +4,10 @@ package ca.softwareengineering.wesabetools.model;
  * A few {@link TransactionFilter} implementations.
  */
 public class Filters {
-	public static class DateBefore implements TransactionFilter {
+	public static class DateBeforeOrEqual implements TransactionFilter {
 		long _date;
 
-		public DateBefore(long date) {
+		public DateBeforeOrEqual(long date) {
 			_date = date;
 		}
 
@@ -16,10 +16,10 @@ public class Filters {
 		}
 	}
 
-	public static class DateAfter implements TransactionFilter {
+	public static class DateAfterOrEqual implements TransactionFilter {
 		long _date;
 
-		public DateAfter(long date) {
+		public DateAfterOrEqual(long date) {
 			_date = date;
 		}
 

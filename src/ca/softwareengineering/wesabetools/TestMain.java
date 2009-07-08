@@ -25,8 +25,8 @@ public class TestMain {
 			TransactionStore filteredStore = new TransactionStore();
 
 			String startDate = args[1], endDate = args[2];
-			filteredStore.addFilter(new Filters.DateAfter(Util.getDateFromIso8601Day(startDate)));
-			filteredStore.addFilter(new Filters.DateBefore(Util.getDateFromIso8601Day(endDate)));
+			filteredStore.addFilter(new Filters.DateAfterOrEqual(Util.getDateFromIso8601Day(startDate)));
+			filteredStore.addFilter(new Filters.DateBeforeOrEqual(Util.getDateFromIso8601Day(endDate)));
 			filteredStore.addFilter(new Filters.NotTransfer());
 			filteredStore.addFilter(new Filters.AmountLessThanOrEqual(0));
 
@@ -34,13 +34,15 @@ public class TestMain {
 			System.out.printf("Date Range: %s - %s\n", startDate, endDate);
 			System.out.println(filteredStore.getStats());
 
-			TransactionReport spendingRep = new SpendingReport(), inclusiveRep = new InclusiveTopTagsSpendingReport();
-			writeReportHeader(spendingRep);
-			spendingRep.runReport(System.out, filteredStore);
-			System.out.println();
-			writeReportHeader(inclusiveRep);
-			inclusiveRep.runReport(System.out, filteredStore);
-
+			TransactionReport[] reports = new TransactionReport[] { 
+				new SpendingReport(),
+				new InclusiveTopTagsSpendingReport()
+				};
+			for (TransactionReport r : reports) {
+				writeReportHeader(r);
+				r.runReport(System.out, filteredStore);
+				System.out.println();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

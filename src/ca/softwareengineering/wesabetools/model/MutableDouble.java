@@ -1,9 +1,6 @@
-/**
- * 
- */
 package ca.softwareengineering.wesabetools.model;
 
-public class MutableDouble {
+public class MutableDouble implements Comparable<MutableDouble> {
 	private double val;
 
 	public MutableDouble(double v) {
@@ -20,6 +17,15 @@ public class MutableDouble {
 
 	public void increment(double val) {
 		this.val += val;
+	}
+
+	public int compareTo(MutableDouble o) {
+		if (o.val > this.val)
+			return -1;
+		else if (o.val < this.val)
+			return 1;
+		else
+			return 0;
 	}
 
 	@Override

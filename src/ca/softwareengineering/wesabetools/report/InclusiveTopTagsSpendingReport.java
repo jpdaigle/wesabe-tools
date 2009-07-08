@@ -25,12 +25,7 @@ public class InclusiveTopTagsSpendingReport implements TransactionReport {
 		}
 
 		public int compareTo(TagMapEntry o) {
-			if (o._e.getValue().get() > _e.getValue().get())
-				return -1;
-			else if (o._e.getValue().get() < _e.getValue().get())
-				return 1;
-			else
-				return 0;
+			return this._e.getValue().compareTo(o._e.getValue());
 		}
 	}
 
